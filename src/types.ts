@@ -367,7 +367,10 @@ export default function typesPlugin(_fork: Fork) {
         if (bicfIndex >= 0) {
           return builtInCtorTypes[bicfIndex];
         }
-
+        // Beezwax addition to prevent "missing name" error.
+        if ((value().toString() === "/(?:)/")) {
+          name = "";
+        }
         if (typeof name !== "string") {
           throw new Error("missing name");
         }
